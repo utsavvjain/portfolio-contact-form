@@ -1,0 +1,38 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'portfolio-contact-me
+
+  '
+Resources:
+  ContactFormFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://portfolio-contact-form-lambda/59b6d51067d1ad557ce7e1fda00567de
+      Handler: com.portfolio.contact.ContactFormHandler::handleContactForm
+      Runtime: java11
+      MemorySize: 512
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /hello
+            Method: get
+    Metadata:
+      SamResourceId: ContactFormFunction
+Outputs:
+  ContactFormApi:
+    Description: API Gateway endpoint URL for Prod stage for Hello World function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/hello/
+  ContactFormFunction:
+    Description: Contact Form Function ARN
+    Value:
+      Fn::GetAtt:
+      - ContactFormFunction
+      - Arn
+  ContactFormIamRole:
+    Description: Implicit IAM Role created for Hello World function
+    Value:
+      Fn::GetAtt:
+      - ContactFormFunctionRole
+      - Arn

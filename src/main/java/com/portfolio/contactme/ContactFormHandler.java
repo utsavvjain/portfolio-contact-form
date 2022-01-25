@@ -1,6 +1,7 @@
 package com.portfolio.contactme;
-public class ContactFormHandler{
-    public static void main(String args[]){
-        
+
+public class ContactFormHandler {
+    public String handleContactForm(String data) {
+        return "handled";
     }
 }

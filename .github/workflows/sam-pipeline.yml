@@ -14,7 +14,8 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-south-1
-
+      # Build Java
+      - run: mvn clean package
       # sam build 
       - run: sam package --template-file template.yaml --s3-bucket portfolio-contact-form-lambda --output-template-file output-tempate.yml
 

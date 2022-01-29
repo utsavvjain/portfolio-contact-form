@@ -13,13 +13,13 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-south-1
+          aws-region: ap-south-1    
       # Build Java
       - run: mvn clean package
       #Email subtitution
-      - run : ls
-      - run : eval 'sed -i "s/SENDER_EMAIL:.*/SENDER_EMAIL':' $FROM/" template.yaml'
-      - run : eval 'sed -i "s/RECEIVER_EMAIL:.*/RECEIVER_EMAIL':' $TO/" template.yaml'
+      - run : printenv
+      - run : eval 'sed -i "s/SENDER_EMAIL:.*/${{ SENDER_EMAIL }}':' $FROM/" template.yaml'
+      - run : eval 'sed -i "s/RECEIVER_EMAIL:.*/${{ RECEIVER_EMAIL }}':' $TO/" template.yaml'
       - run : cat template.yaml
       # sam build 
       - run: sam package --template-file template.yaml --s3-bucket portfolio-contact-form-lambda --output-template-file output-tempate.yml

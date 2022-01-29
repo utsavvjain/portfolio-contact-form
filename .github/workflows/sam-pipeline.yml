@@ -17,6 +17,7 @@ jobs:
       # Build Java
       - run: mvn clean package
       #Email subtitution
+      - run : ls
       - run : eval 'sed -i "s/SENDER_EMAIL:.*/SENDER_EMAIL':' $FROM/" template.yaml'
       - run : eval 'sed -i "s/RECEIVER_EMAIL:.*/RECEIVER_EMAIL':' $TO/" template.yaml'
       - run : cat template.yaml

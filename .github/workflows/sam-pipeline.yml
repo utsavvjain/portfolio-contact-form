@@ -17,8 +17,8 @@ jobs:
       # Build Java
       - run: mvn clean package
       #Email subtitution
-      - run : echo 'sed -i "s/SENDER_EMAIL:.*/SENDER_EMAIL: $FROM/" template.yaml'
-      - run : echo 'sed -i "s/RECEIVER_EMAIL:.*/RECEIVER_EMAIL: $TO/" template.yaml'
+      - run : sed -i "s/SENDER_EMAIL:.*/SENDER_EMAIL:$FROM/" template.yaml
+      - run : sed -i "s/RECEIVER_EMAIL:.*/RECEIVER_EMAIL:$TO/" template.yaml
       # sam build 
       - run: sam package --template-file template.yaml --s3-bucket portfolio-contact-form-lambda --output-template-file output-tempate.yml
 
